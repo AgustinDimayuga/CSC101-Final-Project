@@ -37,7 +37,8 @@ function draw() {
   healthBar(xPosCharacter, yPosCharcter, xPosCharacter2, yPosCharacter2);
   damage();
   checkGameOver();
-  opponentsTurn();
+  displayMouseCoordinates()
+  displayTurn()
 }
 // Function to create player attacks
 function playeroptions(xpos, ypos) {
@@ -68,6 +69,8 @@ function mouseClicked() {
   if (mouseX > 50 && mouseX < 300 && mouseY > 600 && mouseX < 650 && myTurn== true) {
     attackUsed[0] = true;
     myTurn = false 
+    //Opponents turn with a delay 
+    setTimeout(opponentsTurn, 5000); // 5 second delay 
   } else {
     attackUsed[0] = false;
   }
@@ -78,7 +81,7 @@ function damage() {
     damageNumber = round(random(20, 100));
     attackUsed[0] = false;
     healthValue = healthValue - damageNumber;
-  }
+  } 
 }
 //Functino once battle lost or wont
 function checkGameOver() {
@@ -108,9 +111,21 @@ if (myTurn == false) {
   opponentDamage = random(opponentAttacks)
   myTurn = true
   healthValueMe = healthValueMe - opponentDamage
+} 
 }
 
 
-}
 
-//i cant 
+function displayMouseCoordinates() {
+  push();
+  fill(0);
+  text("X: " + mouseX + " | Y: " + mouseY, 10, height - 20);
+  pop();
+}
+function displayTurn() { 
+if (myTurn == true) { 
+  text("Your Turn", 480, 370); 
+} else if (myTurn == false) { 
+  text("Opponents Turn", 480,370)
+}
+}

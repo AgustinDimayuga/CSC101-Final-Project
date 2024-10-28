@@ -80,10 +80,10 @@ function checkGameOver() {
     strokeWeight(25);
     text("YOU WON !", width / 2, height / 2);
     pop();
-    noLoop()\
+    noLoop()
   }
 }
-
+// I don't know what i am doing 
 // function displayMouseCoordinates() {
 //   push()
 //   fill(0);

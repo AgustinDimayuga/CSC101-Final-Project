@@ -83,7 +83,7 @@ function damage() {
     healthValue = healthValue - damageNumber;
   } 
 }
-//Functino once battle lost or wont
+//Functino once battle lost or won
 function checkGameOver() {
   if (healthValue < 0) {
     push();
@@ -106,6 +106,8 @@ function checkGameOver() {
 
   }
 }
+
+// Function to record opponents attack 
 function opponentsTurn () { 
 if (myTurn == false) {
   opponentDamage = random(opponentAttacks)
@@ -122,10 +124,19 @@ function displayMouseCoordinates() {
   text("X: " + mouseX + " | Y: " + mouseY, 10, height - 20);
   pop();
 }
+// Function to show who's turn it is 
 function displayTurn() { 
 if (myTurn == true) { 
+  push()
+  textSize(30)
+  strokeWeight(30)
   text("Your Turn", 480, 370); 
+  pop()
 } else if (myTurn == false) { 
+  push()
+  textSize(30)
+  strokeWeight(10)
   text("Opponents Turn", 480,370)
+  pop()
 }
 }

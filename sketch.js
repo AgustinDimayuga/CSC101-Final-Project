@@ -83,10 +83,3 @@ function checkGameOver() {
     noLoop()
   }
 }
-// I don't know what i am doing 
-// function displayMouseCoordinates() {
-//   push()
-//   fill(0);
-//   text("X: " + mouseX + " | Y: " + mouseY, 10, height - 20);
-//   pop()
-// }

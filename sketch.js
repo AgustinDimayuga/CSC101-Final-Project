@@ -1,13 +1,21 @@
-let attack1 = false;
-let attack2 = false;
-let attack3 = false;
-let attack4 = false;
-let attackTrue = false;
+let attack = []
+let attackUsed = []
+let opponentAttacks = []
 let healthValue = 1000;
+let healthValueMe = 1000
 let gameOver = false;
-
+let myTurn = true 
+let numOfAttacks = 4
 function setup() {
   createCanvas(800, 800);
+  // Create 4 Variables for 4 attacks 
+  for(i=0;i<numOfAttacks;i++) {
+    attack[i] = false
+    opponentAttacks[i] = i+1*100
+  }
+  for (i=0;i<numOfAttacks;i++) { 
+    attackUsed[i] = false
+  }
 }
 // Variables for "Characters"
 
@@ -29,6 +37,7 @@ function draw() {
   healthBar(xPosCharacter, yPosCharcter, xPosCharacter2, yPosCharacter2);
   damage();
   checkGameOver();
+  opponentsTurn();
 }
 // Function to create player attacks
 function playeroptions(xpos, ypos) {
@@ -45,7 +54,7 @@ function healthBar(xPos, yPos, xPos2, yPos2) {
   textSize(20);
   fill(255, 0, 0);
   strokeWeight(20);
-  text("Health Bar ", xPos + 50, yPos - 30);
+  text("Health Bar = " + healthValueMe, xPos + 50, yPos - 30);
   text("Health Bar = " + healthValue, xPos2 + 50, yPos2 - 30);
   pop();
   push();
@@ -56,21 +65,22 @@ function healthBar(xPos, yPos, xPos2, yPos2) {
 }
 // Function to check the attack used
 function mouseClicked() {
-  if (mouseX > 50 && mouseX < 300 && mouseY > 600 && mouseX < 650) {
-    attackTrue = true;
+  if (mouseX > 50 && mouseX < 300 && mouseY > 600 && mouseX < 650 && myTurn== true) {
+    attackUsed[0] = true;
+    myTurn = false 
   } else {
-    attackTrue = false;
+    attackUsed[0] = false;
   }
 }
 // Function to record the attack damage
 function damage() {
-  if (attackTrue == true) {
+  if (attackUsed[0] == true) {
     damageNumber = round(random(20, 100));
-    attackTrue = false;
+    attackUsed[0] = false;
     healthValue = healthValue - damageNumber;
   }
 }
-
+//Functino once battle lost or wont
 function checkGameOver() {
   if (healthValue < 0) {
     push();
@@ -81,7 +91,25 @@ function checkGameOver() {
     text("YOU WON !", width / 2, height / 2);
     pop();
     noLoop()
+  } else if(healthValueMe <0) { 
+    push();
+    background(0);
+    textSize(25);
+    fill(255);
+    strokeWeight(25);
+    text("YOU LOST!", width / 2, height / 2);
+    pop();
+    noLoop()
+
   }
 }
+function opponentsTurn () { 
+if (myTurn == false) {
+  opponentDamage = random(opponentAttacks)
+  myTurn = true
+  healthValueMe = healthValueMe - opponentDamage
+}
 
-// Why am i doing this 
+
+}
+

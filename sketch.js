@@ -83,3 +83,5 @@ function checkGameOver() {
     noLoop()
   }
 }
+
+// Why am i doing this 

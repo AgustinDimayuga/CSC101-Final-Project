@@ -1,14 +1,16 @@
-let game;
-
+//let game;
+let scene 
 
 function setup() {
   createCanvas(800, 800);
-  game = new Game();
+  //game = new Game();
+  scene = new ShowMap()
 }
 
 function draw() {
   background(225);
-  game.display();
+  //game.display();
+  scene.display()
 }
 
 class Player {
@@ -48,22 +50,25 @@ class Opponent {
   }
   draw() {
     square(this.xPos, this.yPos, this.size);
+    line(0, this.yPos + this.size, width, this.yPos + this.size);
   }
 }
-class ShowMap { 
-constructor() { 
-this.player = new Player(200,200,20)
-this.opponents = [new Opponent(100,100,20),
-  new Opponent(50,200,20),
-  new Opponent(50,300,20), 
-  new Opponent(50,350,20)]
-
-}
-display() { 
-  this.player.draw()
-  this.player.update()
-  for(i=0;i<this.opponents.length;i++)
-  this.opponent[i].draw()
-}
-
+class ShowMap {
+  constructor() {
+    this.player = new Player(200, 20, 20);
+    this.opponents = [
+      new Opponent(50, 100, 20),
+      new Opponent(50, 200, 20),
+      new Opponent(50, 300, 20),
+      new Opponent(50, 400, 20),
+      new Opponent(50, 500, 20),
+      new Opponent(50, 600, 20),
+      new Opponent(50, 700, 20),
+    ];
+  }
+  display() {
+    this.player.draw();
+    this.player.update();
+    for (let i = 0; i < this.opponents.length; i++) this.opponents[i].draw();
+  }
 }

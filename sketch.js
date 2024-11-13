@@ -1,16 +1,17 @@
-//let game;
-let scene 
-let game
+let scene;
+let game;
+
 function setup() {
   createCanvas(800, 800);
-  //game = new Game();
-  scene = new ShowMap()
-  game = new Game()
+  scene = new ShowMap();
+  game = new Game();
 }
 
 function draw() {
   background(225);
-  //game.display();
-  scene.display()
+  if (scene.sceneActive) {
+    scene.display(); // Display map scene if active
+  } else {
+    game.display(); // Display battle scene if collision occurred
+  }
 }
-

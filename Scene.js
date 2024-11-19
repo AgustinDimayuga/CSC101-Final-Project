@@ -62,17 +62,24 @@ class Player {
 
 // Opponent Class
 class Opponent {
-  constructor(xPos, yPos, size) {
+  constructor(xPos, yPos, size, health, damageRange, color) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.size = size;
+    this.size = size;
+    this.health = health;
+    this.damageRange = damageRange;
     this.defeated = false;
+    this.color = color;
   }
 
   draw() {
     if (!this.defeated) {
+      push();
+      fill(this.color);
       square(this.xPos, this.yPos, this.size);
       line(0, this.yPos + this.size, width, this.yPos + this.size);
+      pop();
     }
   }
 }
@@ -82,13 +89,13 @@ class ShowMap {
   constructor() {
     this.player = new Player(200, 20, 20);
     this.opponents = [
-      new Opponent(50, 100, 20),
-      new Opponent(50, 200, 20),
-      new Opponent(50, 300, 20),
-      new Opponent(50, 400, 20),
-      new Opponent(50, 500, 20),
-      new Opponent(50, 600, 20),
-      new Opponent(50, 700, 20),
+      new Opponent(50, 100, 20, 500, [50, 100], "#FF0000"),
+      new Opponent(50, 200, 20, 750, [75, 150], "#00FF00"),
+      new Opponent(50, 300, 20, 1000, [100, 200], "#0000FF"),
+      new Opponent(50, 400, 20, 1250, [150, 250], "#FFFF00"),
+      new Opponent(50, 500, 20, 1500, [200, 300], "#FF00FF"),
+      new Opponent(50, 600, 20, 1750, [250, 350], "#00FFFF"),
+      new Opponent(50, 700, 20, 2000, [300, 400], "#FF8800"),
     ];
     this.sceneActive = true; // Track if the map scene is active
     this.currentOpponent = null;
@@ -107,6 +114,7 @@ class ShowMap {
           console.log("Collision detected with " + i);
           this.currentOpponent = i; // Track the index of the current opponent
           this.sceneActive = false; // Stop showing map on collision
+          game.setOpponent({ health: this.opponents[i].health });
           break;
         }
       }
